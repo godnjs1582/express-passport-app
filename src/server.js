@@ -9,6 +9,11 @@ const config = require("config");
 const serverConfig = config.get("server");
 const mainRouter = require("./routes/main.router");
 const usersRouter = require("./routes/users.router");
+const postsRouter=require("./routes/posts.router");
+const commentsRouter=require("./routes/comments.router");
+const friendsRouter=require("./routes/friends.router");
+const profileRouter=require("./routes/profile.router");
+const likesRouter=require("./routes/likes.router");
 
 const PORT = serverConfig.port;
 
@@ -55,10 +60,17 @@ mongoose
     console.log(err);
   });
 
-app.use("/static", express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", mainRouter);
 app.use("/auth", usersRouter);
+app.use("/posts",postsRouter);
+app.use("/comments", commentsRouter);
+app.use("/likes",likesRouter);
+app.use("/friends", friendsRouter);
+app.use("/likes",likesRouter);
+app.use("/profile", profileRouter);
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
