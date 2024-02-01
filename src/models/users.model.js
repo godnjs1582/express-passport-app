@@ -5,26 +5,64 @@ const bcrypt = require("bcryptjs");
 //구글 로그인 1 => 구글 아이디를 가짐,
 //이메일, 패스워드 로그인 => 구글 아이디는 null 을 가짐 => error 발생
 
-const userSchema = mongoose.Schema({
-  email: {
-    type: String,
-    unique: true,
+const userSchema = mongoose.Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+    },
+    password: {
+      type: String,
+      minLength: 5,
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+    kakaoId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+    username: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    firstName: {
+      type: String,
+      default: "First Name",
+    },
+    lastName: {
+      type: String,
+      default: "Last Name",
+    },
+    bio: {
+      type: String,
+      default: "데이터 없음",
+    },
+    hometown: {
+      type: String,
+      default: "데이터 없음",
+    },
+    workspace: {
+      type: String,
+      default: "데이터 없음",
+    },
+    education: {
+      type: String,
+      default: "데이터 없음",
+    },
+    contact: {
+      type: String,
+      default: "데이터 없음",
+    },
+    friends: [{ type: String }],
+    friendsRequests: [{ type: String }],
   },
-  password: {
-    type: String,
-    minLength: 5,
-  },
-  googleId: {
-    type: String,
-    unique: true,
-    sparse: true,
-  },
-  kakaoId:{
-    type: String,
-    unique: true,
-    sparse: true,
-  }
-});
+  { timestamps: true }
+);
 
 const saltRounds = 10;
 userSchema.pre("save", function (next) {
