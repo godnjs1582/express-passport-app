@@ -16,7 +16,7 @@ usersRouter.post("/login", (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.redirect("/");
+      res.redirect("/posts");
     });
   })(req, res, next);
 });
@@ -54,7 +54,7 @@ usersRouter.get(
 );
 usersRouter.get("/kakao", passport.authenticate("kakao"));
 usersRouter.get("/kakao/callback", passport.authenticate("kakao", {
-  successReturnToOrRedirect: "/",
+  successReturnToOrRedirect: "/posts",
   failureRedirect: "/login",
 }));
 

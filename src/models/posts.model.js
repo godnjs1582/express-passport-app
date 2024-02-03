@@ -3,7 +3,7 @@ const { default: mongoose } = require("mongoose");
 const postSchema = new mongoose.Schema(
   {
     description: String,
-    comments: [{ type: moongoe.Schema.Types.ObjectId, ref: "Comment" }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
     author: {
       id: {
         type: mongoose.Schema.Types.ObjectId,
